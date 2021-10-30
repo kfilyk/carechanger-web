@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 # This does nothing right now. Oops.
 # TODO: actually do this
 def handler403(request, *args, **argv):
-    response = render_to_response('errors/403.html', {}, context_instance=RequestContext(request))
+    response = render('errors/403.html', {}, context_instance=RequestContext(request))
     response.status_code = 403
     return response
 
