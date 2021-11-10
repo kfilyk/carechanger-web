@@ -57,7 +57,7 @@
 									<p class="th status_dirty" onmouseleave="on_leave_dirty_status('{{p.id}}')" onmouseover="on_hover_dirty_status('{{p.id}}')" onclick="resolve_event('{{p.id}}')">event</p>
 								{% endif %}
 								<p class="th">{{p.first_name}} {{p.last_name}}</p>
-								<p class="th">Device: {{p.device}}</p>
+								<p class="th">D{{p.device.id}}</p>
 								<p class="th">Age: {{p.age}}</p>
 								<p class="th patient_last_event">Last Event: {{p.last_event}}</p>
 								<canvas class="patient_graph" id="{{p.id}}_graph" style="display:none" width="500" height="250"></canvas>

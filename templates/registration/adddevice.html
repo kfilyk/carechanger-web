@@ -5,17 +5,28 @@
         <title>Add Device</title>
         <link rel="stylesheet" type="text/css" href='{% static "style.css" %}' />
         <link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
+        <script type="text/javascript" src="{% static 'jquery-3.3.1.min.js' %}"> </script>
+
     </head>
     <body>
       <div class="container" id="inputs">
+
         <form method="post">
           {% csrf_token %}
           <br>
-          <!-- Submit button -->
-          {% for c in caregroups %}
-          <!--<input class="radio" type="text" id="{{ form.first_name.id_for_label }}" name="{{ form.first_name.html_name }}" value= {{c.name}} >
+          <!-- Submit button : form.caregroup.html_name is just 'caregroup'; form.caregroup.id_for_label is just 'id_caregroup'-->
+          <SELECT class="basic" id="{{ form.patient_id.id_for_label }}" name = "{{ form.patient_id.html_name }}">
+            {% for p in patients %}
+              {% if p.device is None  %}
+                <OPTION value="{{p.id}}" >{{p.first_name}}, {{p.last_name}}</OPTION> <!-- value == one in list of patients-->
+              {% endif %}
+            {% endfor %}
+          </SELECT>
+          
+          <input class="basic" id="{{ form.caregroup.id_for_label }}" name = "{{ form.caregroup.html_name }}" value= "{{ user.active_caregroup.id }}">
+
           <br>
-          <br>-->
+          <br>
           <button class="login" type="submit">Add Device</button>
         </form>
       </div>

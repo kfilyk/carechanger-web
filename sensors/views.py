@@ -19,13 +19,12 @@ def handler403(request, *args, **argv):
     response.status_code = 403
     return response
 
-
 def index(request, *args, **kwargs):
     return render(request, "index/index.html", {})
 
 # TEMPORARY
 def get_data(request, *args, **kwargs):
-    return render(request, 'charts.html', {});
+    return render(request, 'charts.html', {})
 
 def dashboard(request, *args, **kwargs):
     user = request.user
@@ -52,7 +51,6 @@ def ajax_change_caregroup(request):
         return JsonResponse({"success": True})
     except Exception as e:
         return JsonResponse({"success": False})
-    return JsonResponse(data)
 
 # returns patient temperature, humidity data from table in postgres
 # used by get_patient_data function in sensors.js
@@ -101,14 +99,14 @@ def ajax_set_patient_status_clean(request):
 #class LoginUser(LoginView):
    # form_class = LoginForm
 
-    '''def get_success_url(self):
+    '''
+    def get_success_url(self):
         request = self.request.GET
         if not request.POST.get('remember_me', None):
             request.session.set_expiry(0)
         url = self.get_redirect_url()
         return url
         '''
-
 
 def add_patient(request, *args, **kwargs):
     # If the form has been submitted
@@ -126,21 +124,32 @@ def add_patient(request, *args, **kwargs):
         form = PatientCreationForm() # Unbound form
     return render(request, 'registration/addpatient.html', { 'form': form })
 
-
 def add_device(request):
+    user = request.user
+    patients=Patient.objects.none()
+    if(user.active_caregroup != None):
+        patients = Patient.objects.filter(caregroup = user.active_caregroup)
+
     if request.method == 'POST':
         user = request.user
         caregroup = user.active_caregroup
         form = DeviceCreationForm(request.POST) # Form bound to POST data
         if form.is_valid():  # If the form passes all validation rules
-            device = form.save()
-            device.caregroup=caregroup
-            device.save()
+            patient_id = form.cleaned_data.get('patient_id')
+            print("PATIENT ID: ", patient_id)
+            device = form.save() # save form to database
+            print("DEVICE: ", device)
+            patient = patients.filter(id = patient_id) # get first (and only) object in queryset
+            patient = patient[0]
+            patient.device = device
+            patient.save()
+            #device.save() # call save function for DeviceCreationForm
             return(redirect('dashboard'))  # Redirect to the dashboard (TODO: change redirect location?)
+        else:
+            print("INVALID DEVICE")
     else:
         form = DeviceCreationForm() # Unbound form
-    return render(request, 'registration/adddevice.html', { 'form': form })
-
+    return render(request, 'registration/adddevice.html', { 'form': form, 'patients':patients} )
 
 def add_care_group(request):
     if request.method == 'POST':
@@ -186,14 +195,12 @@ def receive_data(request):
             event = data.get('event')
             time = datetime.fromtimestamp(int(data.get('time')))
             event = int(event)
-            print("FLAG0!!!!")
-            print(time);
             device_id = data.get('device')
             patient = Patient.objects.get(device_id=device_id)
             # event status of 2 == event has occurred. status of 1 == patient clean. Require user to reset flag on their own
             if event == 2:
                 patient.status = 'd'
-                patient.last_event = time;
+                patient.last_event = time
                 patient.save()
             patient.save()  # Save the modified patient object
             form.save()

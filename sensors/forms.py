@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, authenticate
 from sensors.models import Patient, CareGroup, Data, User, Device
 from django.contrib.auth.hashers import make_password
-
+import logging
+logger = logging.getLogger('app_api')
 
 # Form for adding a new patient to the database
 class PatientCreationForm(forms.ModelForm):
@@ -30,14 +31,12 @@ class LoginForm(forms.ModelForm):
 
 # Form for adding a new device to the database
 class DeviceCreationForm(forms.ModelForm):
-    active = forms.BooleanField()   # TODO: figure out why this comes up as 0 in the database
-
     class Meta:
         model = Device
         fields = (
-            'active',
+            'patient_id', # if not assigned to a patient, considered inactive
+            'caregroup',
         )
-
 
 # Form for user creation TODO: Send a confirmation email to the provided address
 class SignUpForm(UserCreationForm):
@@ -65,7 +64,7 @@ class CareGroupCreationForm(forms.ModelForm):
             'admin_email',
         )
 
-    # Overrides the default save method to include password hashing
+    # Save creates a DATABASE INSTANCE
     def save(self, commit=True):
         instance = super(CareGroupCreationForm, self).save(commit=False)
         instance.password = make_password(self.cleaned_data['password'])  # Make the password hashed before saving
@@ -97,11 +96,11 @@ class DataForm(forms.ModelForm):
             'time',
         )
 
-    # Overrides the default save method to update the patient_id in the database
+    # Save creates a DATABASE INSTANCE
     def save(self, commit=True):
         instance = super(DataForm, self).save(commit=False)  # Create an instance of the data form
-        device_id = self.cleaned_data.get('device')  # Get the device ID from the data packet
-        patient = Patient.objects.get(device_id=device_id)  # Get the patient object corresponding to the device
+        device = self.cleaned_data.get('device')  # Get the device ID from the data packet
+        patient = Patient.objects.get(device=device)  # Get the patient object corresponding to the device
         instance.patient_id = patient.pk  # Send the patient's primary key to the database along with the form
         if commit:
             instance.save()  # Save the form
