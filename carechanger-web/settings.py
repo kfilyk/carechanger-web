@@ -83,14 +83,29 @@ WSGI_APPLICATION = "carechanger-web.wsgi.application"
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
+    "local": {
+
+        #POSTGRES 
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "carechanger",
         "USER": "kfilyk",
         "PASSWORD": "pass"
+ 
+        # SQLITE 
         #"ENGINE": "django.db.backends.sqlite3", # for simple sqlite3 db
         #"NAME": os.path.join(BASE_DIR, "db.sqlite3")
+
+    },
+    # use 'heroku pg:psql postgresql-curved-14194 --app carechanger' to access postgres table
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "HOST": "ec2-107-23-247-29.compute-1.amazonaws.com",
+        "NAME": "d9320006e5fdpf",
+        "USER": "xrcenogqtzlwsd",
+        "PORT": "5432",
+        "PASSWORD": "4377525774d5774522118cb8b389c01461f58e7b9b64d6d8b31c0466871c9984"
     }
+
 }
 
 # Password validation

@@ -18,6 +18,11 @@ This web framework was designed and built by Ross, Kelvin, and Misha of the Univ
 4. python manage.py makemigrations - Whenever updating database schema, run 'makemigrations' to instantiate changes. Then rerun step 2 to commit them. 
 5. .mode csv / .import Data.csv sensors_data --skip 1 - Use this to load example sensor data into sensors_data table. '--skip 1' avoids inputting the header row
 
+# REMOTE SETUP
+1. setup settings.py with proper credentials for heroku backend database: https://dev.to/prisma/how-to-setup-a-free-postgresql-database-on-heroku-1dc1
+2. heroku pg:psql postgresql-curved-14194 --app carechanger - access remote project instance of postgres 
+3. heroku run:detached python manage.py createsuperuser - create a superuser for the project and begin!
+
 # DATABASE
 
 - SQLITE3 (local, small db)
