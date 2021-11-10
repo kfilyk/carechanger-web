@@ -134,18 +134,23 @@ def add_device(request):
         user = request.user
         caregroup = user.active_caregroup
         form = DeviceCreationForm(request.POST) # Form bound to POST data
+        form.caregroup = caregroup
+        print('FORM: ', form)
         if form.is_valid():  # If the form passes all validation rules
-            patient_id = form.cleaned_data.get('patient_id')
-            print("PATIENT ID: ", patient_id)
+            p = form.cleaned_data.get('patient')
+            print("PATIENT ID: ", p.id)
+            patient = patients.filter(id = p.id) # get first (and only) object in queryset
             device = form.save() # save form to database
-            print("DEVICE: ", device)
-            patient = patients.filter(id = patient_id) # get first (and only) object in queryset
+            device.caregroup = caregroup
+            device.save()
             patient = patient[0]
             patient.device = device
             patient.save()
             #device.save() # call save function for DeviceCreationForm
             return(redirect('dashboard'))  # Redirect to the dashboard (TODO: change redirect location?)
         else:
+            print(form.cleaned_data)
+
             print("INVALID DEVICE")
     else:
         form = DeviceCreationForm() # Unbound form
@@ -160,6 +165,7 @@ def add_care_group(request):
             caregroup = form.save()  # Save the form
             user = request.user # get current user
             caregroup.users.add(user) # add user to caregroup internal list
+            caregroup.admin = user
             user.active_caregroup = caregroup
             user.caregroups.add(caregroup)
             user.save()

@@ -84,8 +84,12 @@ WSGI_APPLICATION = "carechanger-web.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3")
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "carechanger",
+        "USER": "kfilyk",
+        "PASSWORD": "pass"
+        #"ENGINE": "django.db.backends.sqlite3", # for simple sqlite3 db
+        #"NAME": os.path.join(BASE_DIR, "db.sqlite3")
     }
 }
 

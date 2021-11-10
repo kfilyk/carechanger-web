@@ -5,8 +5,8 @@ from django.conf import settings
 class CareGroup(models.Model):
     name = models.CharField(max_length=254, unique=True)
     password = models.CharField(max_length=254)
-    users = models.ManyToManyField(settings.AUTH_USER_MODEL) # many users to many caregroups
-    admin_email = models.EmailField(max_length=254)
+    users = models.ManyToManyField('User') # many users to many caregroups
+    admin = models.ForeignKey('User', related_name='%(class)s_admin', null=True, on_delete=models.SET_NULL) # if admin is deleted, delete caregroup
 
 class User(AbstractUser):
     active_caregroup = models.ForeignKey(CareGroup, related_name='%(class)s_active_caregroup', null=True, on_delete=models.SET_NULL)
@@ -20,8 +20,8 @@ class User(AbstractUser):
 # ForeignKey automatically assumes primary key 
 # https://docs.djangoproject.com/en/2.1/ref/models/fields/
 class Device(models.Model):
-    patient_id = models.CharField(max_length=16, null=True) # one patient id per device
-    caregroup = models.ForeignKey(CareGroup, on_delete=models.CASCADE) # many devices to one caregroup primary key; if caregroup deleted cascade delete devices
+    patient = models.OneToOneField('Patient', related_name='%(class)s_patient', null=True, on_delete=models.SET_NULL) # one patient to one device; if device deleted, set patient device to null
+    caregroup = models.ForeignKey(CareGroup, null=True, on_delete=models.CASCADE) # many devices to one caregroup primary key; if caregroup deleted cascade delete devices
 
 class Patient(models.Model):
     STATUSES = (
@@ -31,7 +31,7 @@ class Patient(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=40)
     age = models.IntegerField()
-    device = models.OneToOneField(Device, null=True, on_delete=models.SET_NULL) # one patient to one device; if device deleted, set patient device to null
+    device = models.OneToOneField(Device, related_name='%(class)s_device', null=True, on_delete=models.SET_NULL) # one patient to one device; if device deleted, set patient device to null
     caregroup = models.ForeignKey(CareGroup, null=True, on_delete=models.CASCADE) # many patients to one care group
     status = models.CharField(max_length=20, choices=STATUSES, default='c')
     last_event = models.DateTimeField(null=True)

@@ -4,11 +4,11 @@ A Heroku web app running Django with a PostgreSQL backend. The CareChanger platf
 
 This web framework was designed and built by Ross, Kelvin, and Misha of the University of Victoria Biomedical Club.
 
-# LOGIN
+# PASSWORDS
 
-username: testuser
-email: kelvinfilyk@gmail.com
-pass: carechanger
+- SUPERUSER: kfilyk / kelvinfilyk@gmail.com / carechanger
+- CAREGROUP: cg1 / carechanger
+- POSTGRES (LOCAL): kfilyk / pass
 
 # LOCAL SETUP
 
@@ -19,9 +19,10 @@ pass: carechanger
 5. .mode csv / .import Data.csv sensors_data --skip 1 - Use this to load example sensor data into sensors_data table. '--skip 1' avoids inputting the header row
 
 # DATABASE
+
+- SQLITE3 (local, small db)
 Extra help: https://docs.djangoproject.com/en/3.2/intro/tutorial02/
 Database models can be found in sensors/models.py. To browse database, use:
-
 sqlite3 db.sqlite3
 
 .headers ON - Makes table column headers visible
@@ -30,6 +31,24 @@ sqlite3 db.sqlite3
 .schema <tablename> - get the schema of a table
 select * from <tablename>;
 ctrl + D -  exit sqlite3
+
+
+- POSTGRES (production quality/scale db)
+https://medium.com/@viviennediegoencarnacion/getting-started-with-postgresql-on-mac-e6a5f48ee399
+https://chartio.com/resources/tutorials/how-to-list-databases-and-tables-in-postgresql-using-psql/
+https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
+local brew services start/stop postgresql - starts/stops the local database instance
+psql postgres - enter postgres and perform queries
+\q - quit postgres terminal
+Local user account: 'kfilyk', 'pass'
+psql postgres -U kfilyk
+\l - list databases
+create database carechanger - creates database
+python manage.py migrate - process database schema code
+python manage.py makemigrations - push database schema to database 'carechanger'
+python manage.py createsuperuser (setup using credentials above)
+\c carechanger - connect to db
+copy sensors_data from '/Users/kelvinfilyk/Desktop/Projects/carechanger-web/Data.csv' delimiter ',' csv header; - must be a superuser
 
 # FAQ
 

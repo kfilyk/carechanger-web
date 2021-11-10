@@ -34,8 +34,7 @@ class DeviceCreationForm(forms.ModelForm):
     class Meta:
         model = Device
         fields = (
-            'patient_id', # if not assigned to a patient, considered inactive
-            'caregroup',
+            'patient',
         )
 
 # Form for user creation TODO: Send a confirmation email to the provided address
@@ -61,7 +60,6 @@ class CareGroupCreationForm(forms.ModelForm):
             'name',
             'password',
             'password_confirmation',
-            'admin_email',
         )
 
     # Save creates a DATABASE INSTANCE
