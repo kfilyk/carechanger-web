@@ -14,7 +14,6 @@ class User(AbstractUser):
 """
     say you want to list all users in a caregroup, without a "users" many to many relationship in model.
     then you have to parse through all userprofiles
-
 """
 
 # ForeignKey automatically assumes primary key 

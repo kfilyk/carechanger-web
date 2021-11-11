@@ -39,14 +39,21 @@ class DeviceCreationForm(forms.ModelForm):
 
 # Form for user creation TODO: Send a confirmation email to the provided address
 class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
+    email = forms.EmailField(max_length=254, help_text='Requires a valid email address.')
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        fields = ('username', 'email', 'password1', 'password2',)
 
+    def validate(self):
+        print("RUNNING SIGNUP FORM VALIDATION FUNCTION")
+
+        # Get the cleaned data for password and password_confirmation
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        # Throws an error if the passwords don't match
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords do not match.")
+        return password2
 
 # Form for care group creation
 # TODO: Send a confirmation email to the provided admin address

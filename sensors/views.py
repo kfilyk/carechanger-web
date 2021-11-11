@@ -176,18 +176,22 @@ def add_care_group(request):
 
 
 def signup(request):
+    print("FLAG")
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
+            print("FORM SUBMISSION: ", form.cleaned_data)
             print("Signup Form Valid")
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('index')
+            return(redirect('dashboard'))  
+        else:
+            print("FORM SUBMISSION: ", form.cleaned_data)
+            print("Signup Form Invalid")
     else:
-        print("Signup Form Invalid")
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 

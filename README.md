@@ -13,15 +13,16 @@ This web framework was designed and built by Ross, Kelvin, and Misha of the Univ
 # LOCAL SETUP
 
 1. python manage.py createsuperuser - create admin for testing/access purposes
-2. python manage.py migrate - build database for storing admin/general gathered data
+2. python manage.py makemigrations/migrate - build database for storing admin/general gathered data, then commit changes
 3. python manage.py runserver - run site locally
-4. python manage.py makemigrations - Whenever updating database schema, run 'makemigrations' to instantiate changes. Then rerun step 2 to commit them. 
-5. .mode csv / .import Data.csv sensors_data --skip 1 - Use this to load example sensor data into sensors_data table. '--skip 1' avoids inputting the header row
+4. .mode csv / .import Data.csv sensors_data --skip 1 - Use this to load example sensor data into sensors_data table. '--skip 1' avoids inputting the header row
 
 # REMOTE SETUP
 1. setup settings.py with proper credentials for heroku backend database: https://dev.to/prisma/how-to-setup-a-free-postgresql-database-on-heroku-1dc1
-2. heroku pg:psql postgresql-curved-14194 --app carechanger - access remote project instance of postgres 
-3. heroku run:detached python manage.py createsuperuser - create a superuser for the project and begin!
+2. heroku run python manage.py makemigrations/migrate --app carechanger
+3. heroku run:detached python manage.py createsuperuser --app carechanger - create a superuser for the project
+4. heroku pg:psql postgresql-curved-14194 --app carechanger - access remote project instance of postgres 
+
 
 # DATABASE
 
