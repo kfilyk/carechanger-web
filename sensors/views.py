@@ -166,6 +166,7 @@ def add_care_group(request):
             user = request.user # get current user
             caregroup.users.add(user) # add user to caregroup internal list
             caregroup.admin = user
+            caregroup.save()
             user.active_caregroup = caregroup
             user.caregroups.add(caregroup)
             user.save()

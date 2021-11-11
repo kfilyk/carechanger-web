@@ -62,3 +62,9 @@ copy sensors_data from '/Users/kelvinfilyk/Desktop/Projects/carechanger-web/Data
 - 'views.py' contains functions that are run as soon as a given page is loaded (dashboard.html runs the 'dashboard' function). These mappings are listed in 'urls.py'.
 - 'forms.py' contain form middleware for creating new instances of classes in 'models.py' and saving them to the database.
 - 'sensors.js' mostly contains functionality used by 'dashboard.html' to pull and render patient statistics from the database.
+
+# TODO
+
+- Notification when a caregroup is attempted to be created with same name as other caregroup
+- Notification when a signup user/pass combination is not good enough/hacked/invalid
+- 
