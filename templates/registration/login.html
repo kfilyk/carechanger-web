@@ -5,6 +5,8 @@
 		<title>Login</title>
 		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 		<link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
+		<link rel="stylesheet" href="https://use.typekit.net/atv2xvq.css">
+
 	</head>
 	<!-- Redirect to dashboard if user is logged in -->
 	{% if user.is_authenticated %}
@@ -13,7 +15,6 @@
 	{% else %}
 		<body>
 			<div class="container" id="inputs">
-
 				<form method="post">
 					<!-- Sends login data -->
 					{% csrf_token %}
@@ -21,24 +22,29 @@
 					<!-- CareChanger logo -->
 					<img id="logo" src="{% static 'carechanger_logo_white.png' %}" alt="CareChanger Logo"/>
 					<br>
-					<!-- Login field -->
+					<!-- Login field: onblur means when object loses focus -->
 					<input class="login" type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}"
-						   placeholder="Username (testuser)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username (testuser) '" required>
+						   placeholder="username (testuser)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'username (testuser)'" required>
 					<br>
 					<br>
 					<!-- Password field -->
 					<input class="login" type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}"
-						   placeholder="Password (carechanger)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password (carechanger) '" required>
+						   placeholder="password (carechanger)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password (carechanger)'" required>
 					<br>
 					<br>
 					<!-- Login button -->
-					<button class="login" type="submit">Login</button>
-					<br>
-					<br>
+					
+					<button class="login_button" type="submit">login</button>
+
 					<!-- Using label makes it so that clicking the text also toggles the checkbox -->
-					<label><input id="{{ form.remember_me.id_for_label }}" name="{{ form.remember_me.html_name }}"
-								  type="checkbox">Keep me logged in</label>
+					<label class="remember_me">remember me
+						<input id="{{ form.remember_me.id_for_label }}" name="{{ form.remember_me.html_name }}" type="checkbox" checked="checked">
+						<span class="checkmark"></span>
+					</label>
+
 				</form>
+				<footer>&copy; CareChanger</footer>
+
 			</div>
 			<!-- Error Message -->
 			{% if form.non_field_errors %}
@@ -51,7 +57,6 @@
 				<span class="dot2"></span>
 				<span class="dot3"></span>
 			{% endif %}
-			<footer>&copy; CareChanger</footer>
 		</body>
 	{% endif %}
 </html>

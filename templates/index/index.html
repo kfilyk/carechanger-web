@@ -6,15 +6,21 @@
 		<link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
 		<script type="text/javascript" src="{% static 'jquery-3.3.1.min.js' %}"> </script>
 		<script type="text/javascript" src="{% static 'sensors.js' %}"> </script>
+		<link rel="stylesheet" href="https://use.typekit.net/atv2xvq.css">
+
 	</head>
 	<body>
-		<div id="nav">
+		<div class="nav">
 				<!-- Navigation menu -->
 				<ul>
-					<li><img id="logo" src="{% static "carechanger_logo_white.png" %}" alt="CareChanger Logo"/><img id="logo_black" src="{% static "carechanger_logo.png" %}" alt="CareChanger Logo"/></li>
+					<li>
+						<div id="logo_container">
+							<img id="logo" src="{% static "carechanger_logo_white.png" %}" alt="CareChanger Logo"/>
+							<img id="logo_black" src="{% static "carechanger_logo.png" %}" alt="CareChanger Logo"/>
+						</div> 
+					</li>
 					<li><a href="">Contact</a></li>
 					<li><a href="">Team</a></li>
-
 					{% if user.is_authenticated%}
 						<li><a href="{% url 'logout' %}">Logout</a></li>
 						<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
@@ -24,15 +30,7 @@
 					{% endif %}
 				</ul>
 		</div>
-
-		<div class="headingDiv">
-				<br>
-				<br>
-				<br>
-
-					 <p style=font-size:80px;margin-bottom:0;font-weight:bold> CareChanger </p>
-					 <h2 style=font-size:20px>A low-cost void event detection and monitoring technology.</h2>
-		</div>
+		<h2 style=font-size:20px>A low-cost void event detection and monitoring technology.</h2>
 
 		<div class="contentDiv">
 				<!--    First content section: CareChanger Intro    -->
@@ -192,32 +190,9 @@
 
 		</div> <!-- end of about -->
 
-
-
 			<footer>
 				<p style=font-size:20px;padding:10px;color:#323232> For more information, you can contact us <a id="here" href="mailto:uvicbmedesign@gmail.com">here</a>.
 				</p>
-
 					&copy; CareChanger</footer>
-
-			<script>
-				/*
-				$( document ).ready(function() {
-    			alert( "ready!" );
-				});*/
-				$(function () {
-					$('body').scroll(function () {
-						var $nav = $(".home_nav");
-						var $ul = $("ul");
-						var $a = $("a");
-						$ul.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-						$a.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-						/* https://jsfiddle.net/we9L9h2r/ */
-						console.log($(this).scrollTop());
-						console.log("NAV HEIGHT:", $nav.height());
-					});
-				});
-			</script>
-
 		</body>
 </html>

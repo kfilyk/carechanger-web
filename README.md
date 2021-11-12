@@ -22,6 +22,7 @@ This web framework was designed and built by Ross, Kelvin, and Misha of the Univ
 2. heroku run python manage.py makemigrations/migrate --app carechanger
 3. heroku run:detached python manage.py createsuperuser --app carechanger - create a superuser for the project
 4. heroku pg:psql postgresql-curved-14194 --app carechanger - access remote project instance of postgres 
+5. \copy sensors_data from '/Users/kelvinfilyk/Desktop/Projects/carechanger-web/data.csv' delimiter ',' csv header; - remote copy data from csv to table
 
 
 # DATABASE

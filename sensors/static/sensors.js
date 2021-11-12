@@ -9,31 +9,12 @@ document.addEventListener('contextmenu', event => event.preventDefault());
 /* This function controls the dynamic nav bar color/height change due to a user scroll*/
 $(function () { /* Using $(function () {}); Ensures that the document (webpage has fully loaded- then compiles js) */
 	$('body').scroll(function () {
-		var $nav = $("#nav");
-		var $ul = $("ul");
-        var $a = $("a"); //new
-		var $nav_link = $(".nav_link");
-
-		//console.log($ul.height())
-
+		var $nav = $(".nav"); 
 		page = $(this) // Don't wanna make this call a bunch, so just make a var with it
-
 		$nav.toggleClass('scrolled', page.scrollTop() > $nav.height());
-		$ul.toggleClass('scrolled', page.scrollTop() > $nav.height());
-		$nav_link.toggleClass('scrolled', page.scrollTop() > $nav.height());
-    $a.toggleClass('scrolled', page.scrollTop() > $nav.height());
-		//console.log($("#dash_nav").length);
-		if($("#dash_nav").length == 0) { //check to see if the div with id="dashnav" exists. If so, currently viewing dashboard
-			var $dash_nav = document.getElementById('dash_nav');
-			if(page.scrollTop() > $nav.height()){
-				$dash_nav.style.top = 60;
-			} else {
-				$dash_nav.style.top = 100;
-			}
-		}
-			/* https://jsfiddle.net/we9L9h2r/ */
-			//console.log($(this).scrollTop());
-			//console.log("NAV HEIGHT:", $nav.height());
+		/* https://jsfiddle.net/we9L9h2r/ */
+		//console.log($(this).scrollTop());
+		//console.log("NAV HEIGHT:", $nav.height());
 	});
 });
 

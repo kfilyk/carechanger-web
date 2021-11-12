@@ -12,10 +12,15 @@
 	</head>
 	{% if user.is_authenticated %}
 		<body>
-			<div id="nav">
+			<div class="nav">
 				<!-- Navigation menu -->
-				<ul id="nav_ul">
-					<li><img id="logo" src="{% static "carechanger_logo_white.png" %}" alt="CareChanger Logo"/><img id="logo_black" src="{% static "carechanger_logo.png" %}" alt="CareChanger Logo"/></li>
+				<ul>
+					<li>
+						<div id="logo_container">
+							<img id="logo" src="{% static "carechanger_logo_white.png" %}" alt="CareChanger Logo"/>
+							<img id="logo_black" src="{% static "carechanger_logo.png" %}" alt="CareChanger Logo"/>
+						</div> 
+					</li>
 					<!-- Check if user has any active caregroups. If so, show dropdown caregroup list selector -->
 					{% if user.active_caregroup is not none %}
 						<li class="nav_li nav_dropdown_list">

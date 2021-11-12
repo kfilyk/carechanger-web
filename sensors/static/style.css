@@ -8,10 +8,17 @@ html, body {
 }
 
 body {
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: lato, sans-serif;
 	background-color:#eeeeee;
 	background-image: linear-gradient(120deg, #66a6ff 0%, #89f7fe 100%);
 	/* https://webgradients.com/ */
+}
+
+.container {
+	position:absolute;
+	width:100%;
+	top: 30%;
+	text-align: center;
 }
 
 /* gets rid of scrollbar, which was buggy/clipped behind dash_content div*/
@@ -104,47 +111,114 @@ h2,h3,h4 {
 }
 
 .login {
-	padding:10px;
-	border-style: solid;
-	border-width: 2px;
-	border-color: rgba(255, 255, 255, 0.5);
-	border-radius: 20px;
-	background-color: inherit;
-	text-align: center;
-	width:50%;
-	color: white;
-	font-size:10pt;
+	font-family: lato, sans-serif;
+	padding-bottom:2px;
+	padding-top:5px;
+	border-style: none;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-color: #ffffff88;
+	background-color: #ffffff00;
+	text-align: left;
+	width:100%;
+	color: #ffffff88;
+	transition:.5s;
+	font-size:12pt;
 }
 
 .login:hover {
-	background-color: #FFFFFF;
-	color:#323232;
+	color:#ffffff;
 	transition:.5s;
+	border-color: #ffffff;
 }
 
 .login:hover::placeholder {
-	color:#323232;
+	color:#ffffff;
 	transition:.5s;
 }
 
 .login::placeholder {
-	color:#ffffff;
+	color:#ffffff88;
+	transition:.5s;
 }
 
 .login:focus {
 	outline:none;
 }
 
+.login_button {
+	font-family: lato, sans-serif;
+	float: left;
+	background-color: #ffffff00;
+	text-align: left;
+	border-style: none;
+	opacity:50%;
+	padding:0px;
+	color: #ffffff;
+	font-size:12pt;
+	transition:.5s;
+}
+
+.login_button:hover {
+	cursor: pointer;
+	opacity: 100%;
+	transition:.5s;
+
+}
+.remember_me {
+	float: right;
+	font-family: lato, sans-serif;
+	color: #ffffff;
+	cursor: pointer;
+	font-size:12pt;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  }
+  
+/* Hide the browser's default checkbox */
+.remember_me input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+  }
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+	content: "";
+	display: none; /* (starts hidden) */
+	margin-left: 10px;
+
+}
+
+/* Show the checkmark when checked */
+.remember_me input:checked ~ .checkmark:after {
+	display: inline-block;
+}
+
+/* Style the checkmark/indicator */
+.remember_me .checkmark:after {
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 2px 2px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
 form {
-	width:300px;
-	text-align: center;
-	margin-top:14%;
 	margin-left:auto;
 	margin-right:auto;
 	border-radius: 25px;
-	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
 	background-color: rgba(255, 255, 255, 0.0);
 	padding:10px;
+	padding-left:30px;
+	padding-right:30px;
 	display:inline-block;
 	padding-bottom:30px;
 }
@@ -246,15 +320,32 @@ li .active_dropdown_list_element { /* the "li" tag in front allows ".active_drop
 	overflow:hidden;
 }
 
+
+#logo_container {
+	position: relative;
+	width:100px;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
+}
+
 #logo {
-	width:100;
+	position: absolute;
+	opacity: 100%;
+	width:100%;
+	left: 0%;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
+	
 }
 
 #logo_black {
-	display:none;
-	width:100;
+	position: absolute;
+	opacity: 0%;
+	width:100%;
+	left: 0%;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
 }
-
 #inputs {
 	text-align: center;
 	padding-top: 20px;
@@ -270,32 +361,41 @@ li .active_dropdown_list_element { /* the "li" tag in front allows ".active_drop
 	left:0px;
 }
 
-#nav {
+.nav {
+	position:fixed;
 	width:100%;
 	top:0px;
-}
+	background-image: linear-gradient(120deg, #66a6ff 0%, #89f7fe 100%) ;
+	overflow:auto; 
+	height: 100px;
+	z-index: 1;
+	transition: 0.5s;
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+	transition-timing-function: ease-out;
 
-#nav ul {
+}
+.nav ul {
 	list-style-type: none;
 	margin:0;
 	padding:0;
-	position:fixed;
 	left:0;
 	top:0;
 	width:100%;
 	transition:0.5s;
-	z-index:5;
-	box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
+	transition-timing-function: ease-out;
+	background-color: #ffffff00;
 }
+
 
 #dash_nav {
 	position:fixed;
 	background-color: white;
 	width:100%;
 	transition:0.5s;
+	transition-timing-function: ease-out;
 	top:100px;
 	padding:5px;
-	z-index:2;
+	z-index:0;
 	box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
 }
 
@@ -314,57 +414,76 @@ li .active_dropdown_list_element { /* the "li" tag in front allows ".active_drop
 	overflow:scroll; /* this ensures dash_content background stays full height even after graphs are opened */
 }
 
-.scrolled .nav_a{
+.scrolled #dash_nav {
+	top:60px;
+	transition:0.5s;
+	transition-timing-function: ease-out;
+
+}
+
+.scrolled a {
+	color: #464a4f;
 	position:relative;
-	color:#323232;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
+
 	/*top:-1px;*/
 }
 
 .scrolled {
-	background-color: #fff; !important;
-  transition: background-color 200ms linear;
-	color:#323232;
-}
-.scrolled ul{
-	background-color: #fff; !important;
-	transition: background-color 200ms linear;
-}
+	background-image: none;
+	background-color: #fff;
+  	transition: background-image 0.5s ease-out;
+	color: #464a4f;
+	height: 60px;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
 
-.scrolled #dash_nav{
-	top:60px;
-	transition:0.5s;
 }
 
 .scrolled li{
-  height:60px;
+  	height:60px;
 	transition:0.5s;
+	transition-timing-function: ease-out;
 	line-height: 60px;
 }
 
-.scrolled .nav_dropdown_list:hover .active_dropdown_list_element { /* when scrolled, keep active_dropdown_list_element element from moving */
+.scrolled #caregroups_list:hover #active_caregroup { /* when scrolled, keep active_caregroup element from moving */
 	border-top-width: 0px;
 	height:60px;
 }
 
-.scrolled .active_dropdown_list_element{
+.scrolled #active_caregroup{
 	border-top-width: 0px;
 	height:60px;
 }
 
-.scrolled li:hover .nav_a{
+.scrolled li:hover a{
 	border-top-width: 0px;
 	height:60px;
 	background-color: #eeeeee;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
 }
 
-
 .scrolled #logo_black {
-	display:block;
-	width:60px;
+	opacity: 100%;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
+
 }
 
 .scrolled #logo {
-	display:none;
+	opacity: 0%;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
+
+}
+
+.scrolled #logo_container {
+	width:60px;
+	transition: 0.5s;
+	transition-timing-function: ease-out;
 }
 
 #name {
@@ -386,9 +505,7 @@ li .active_dropdown_list_element { /* the "li" tag in front allows ".active_drop
 footer {
 	color: #ffffff;
 	text-align: center;
-	font-size:10pt;
-	clear: both;
-	position: relative;
+	font-size:12pt;
 	padding:10px;
 }
 
@@ -404,7 +521,7 @@ footer {
 	background-color: inherit;
 	text-align: center;
 	color: #323232;
-	font-size:10pt;
+	font-size:12pt;
 	margin:0px;
 }
 
