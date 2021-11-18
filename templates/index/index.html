@@ -2,12 +2,10 @@
 <html>
 	<head>
 		<title>Carechanger - Home</title>
-		<link rel="stylesheet" type="text/css" href="{% static "home.css" %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
 		<link rel="icon" type="image/png" href="{% static 'favicon.png' %}"/>
 		<script type="text/javascript" src="{% static 'jquery-3.3.1.min.js' %}"> </script>
 		<script type="text/javascript" src="{% static 'sensors.js' %}"> </script>
-		<link rel="stylesheet" href="https://use.typekit.net/atv2xvq.css">
-
 	</head>
 	<body>
 		<div class="nav">
@@ -15,68 +13,45 @@
 				<ul>
 					<li>
 						<div id="logo_container">
-							<img id="logo" src="{% static "carechanger_logo_white.png" %}" alt="CareChanger Logo"/>
-							<img id="logo_black" src="{% static "carechanger_logo.png" %}" alt="CareChanger Logo"/>
+							<img id="logo_2" src="{% static 'carechanger_logo_blue.png' %}" alt="CareChanger Logo"/>
+							<img id="logo" src="{% static 'carechanger_logo.png' %}" alt="CareChanger Logo"/>
 						</div> 
 					</li>
-					<li><a href="">Contact</a></li>
+					<li><a href="mailto:uvicbmedesign@gmail.com">Contact</a></li>
 					<li><a href="">Team</a></li>
 					{% if user.is_authenticated%}
 						<li><a href="{% url 'logout' %}">Logout</a></li>
 						<li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-						<li><a href="">{{ user.get_username }}</a></li>
+						<li><a href=""><img src="{% static 'user.svg' %}">{{ user.get_username }}</a></li>
 					{% else %}
-						<li><a href="{% url 'login' %}">Login</a></li>
+						<li><a href="{% url 'login' %}">LOG IN</a></li>
 					{% endif %}
 				</ul>
 		</div>
-		<h2 style=font-size:20px>A low-cost void event detection and monitoring technology.</h2>
-
 		<div class="contentDiv">
 				<!--    First content section: CareChanger Intro    -->
-				<table 	cellspacing="0" cellpadding="0" >
+			<table cellspacing="0" cellpadding="0" >
 				<tr>
+					<td class="table_header">
+						<h1><b>A practical care solution for medical personnel.</b></h1>
 					<td>
-						<div class="tableTextDiv">
-							<h3>A practical care solution for medical personnel.</h3>
+					<td>
+						<div class="tableTextDiv" id="intro">
 							<p> The CareChanger platform is a wheelchair embedded sensor for detecting void
 							events among incontinent wheelchair users, coupled with a communication and
 							application service for care providers. </p>
 						</div>
-					</td>
-					<td>
-						<div class="left-aligned-roundedImage">
-							<img src="{% static "final gif.gif" %}" width="400px" height="300px" alt="solidworks gif"/>
-
-						</div>
+						<img class="right_aligned_rounded_img" src="{% static 'final gif.gif' %}" width="400px" height="300px" alt="solidworks gif"/>
 					</td>
 				</tr>
-				</table>
-				<div class="line_divider"> </div>
-
 				<!--    Second content section: Real Time Data    -->
-				<table 	cellspacing="0" cellpadding="0">
 				<tr>
-					<td>
-						<div class="left-aligned-roundedImage">
-						<img src="{% static "code.gif" %}" alt="code typing">
-						</div>
-					</td>
 					<td>
 						<div class="tableTextDiv">
 							<h3> Real-time data collection for optimal patient care. </h3>
 							<p> Temperature and humidity sensors in the device collect data in real-time.
 								The device notifies caretakers of an event as it occurs, allowing for an immediate response. </p>
 						</div>
-					</td>
-				</tr>
-				</table>
-				<div class="line_divider"> </div>
-
-			<!--    Third content section: Easy Wifi connectivity    -->
-			<table cellspacing="0" cellpadding="0">
-			<tr>
-					<td>
 						<div class="tableTextDiv">
 							<h3> Easy Wi-Fi connectivity. </h3>
 							<p>
@@ -85,69 +60,40 @@
 							</p>
 						</div>
 					</td>
-					<td>
-						<div class="left-aligned-roundedImage">
-							<img src="{% static "Wifi.png" %}" alt="Wifi Signal" height="300px" width="350px">
-						</div>
-					</td>
-			</tr>
-			</table>
-			<div class="line_divider"> </div>
-
-			<!--    Fourth content section: Live Graph   -->
-			<table 	cellspacing="0" cellpadding="0">
-			<tr>
-				<td>
-					<div class="left-aligned-roundedImage">
-						<img src="{% static "graph1.png" %}" alt="graph" width=600px height=300px />
-					</div>
-				</td>
-				<td>
-					<div class="tableTextDiv">
-					<h3> Live, automatically updated trend graphs. </h3>
-					<p> With real-time data collection, a graph of all past patient void events are immediately
-						generated on the web app, allowing caretakers to track patient trends
-						and activities.  </p>
-					</div>
-				</td>
-			</tr>
-			</table>
-			<div class="line_divider"> </div>
-
-			<!--    Fifth content section:  Scalability   -->
-			<table 	cellspacing="0" cellpadding="0">
-			<tr>
-				<td>
-					<div class="tableTextDiv">
-					<h3> Large scalability. </h3>
-					<p> With the option to manage various patients and care groups, CareChanger can be
-						implemented in nursing homes. Caretakers can have different care groups with
-						several patients, and they even have the flexibility to care for patients
-						in different care locations. </p>
-					</div>
-				</td>
-				<td>
-					<div class="right-aligned-roundedImage">
-						<img src="{% static "dashboard.png" %}" alt="dashboard" height=250px width=550px />
-					</div>
-				</td>
-			</tr>
-			</table>
-
-	</div> <!-- end of content section  --->
-
-		<div class="aboutDiv">
-			<!-- About Jim and Mariel -->
-			<table 	cellspacing="0" cellpadding="0">
+				</tr>
+				<!--    Fourth content section: Live Graph   -->
 				<tr>
 					<td>
-						<div class="right-aligned-roundedImage">
-							<iframe width="650" height="400" src="https://www.youtube.com/embed/abAtcATXhHo"
-							frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;
-							picture-in-picture" allowfullscreen align="middle"> </iframe>
+						<div class="left_aligned_rounded_img">
+							<img src="{% static "graph1.png" %}" alt="graph" width=600px height=300px />
+						</div>
+						<div class="tableTextDiv">
+						<h3> Live, automatically updated trend graphs. </h3>
+						<p> With real-time data collection, a graph of all past patient void events are immediately
+							generated on the web app, allowing caretakers to track patient trends
+							and activities.  </p>
 						</div>
 					</td>
+				</tr>
+
+				<!--    Fifth content section:  Scalability   -->
+				<tr>
 					<td>
+						<div class="tableTextDiv">
+							<h3> Scalability perfected. </h3>
+							<p> With the ability to manage several patients and devices within discrete caregroups, CareChanger is both
+							flexible and sensitivite to the needs of caretakers and the privacy of clients. </p>
+						</div>
+						<img class="right_aligned_rounded_img" src="{% static 'dashboard.png' %}" alt="dashboard" height=250px width=550px />
+					</td>
+				</tr>
+
+			<!-- About Jim and Mariel -->
+				<tr>
+					<td>
+						<iframe class="left_aligned_rounded_img" src="https://www.youtube.com/embed/abAtcATXhHo"
+						frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;
+						picture-in-picture" allowfullscreen > </iframe>
 						<div class="tableTextDiv">
 							<h3> Jim and Mariel </h3>
 							<p> Jim, CareChanger’s President, was driven to create the CareChanger device for his daughter Mariel,
@@ -155,44 +101,38 @@
 								 from her wet diaper, Jim decided to build a sensing device using a wireless sensor tag.
 								 UVic BMED has been developing and refining a working prototype of the device, along
 								 with the accompanying web application. </p>
-							<p> <a id="underlink" style=color:#464a4f href="https://www.timescolonist.com/life/oak-bay-man-s-device-helps-in-care-of-his-daughter-1.23794723" target="_blank">
-								 Learn more about Jim and Mariel. </a> </p>
+							<a style="color:#323232; font-weight: bold" href="https://www.timescolonist.com/life/oak-bay-man-s-device-helps-in-care-of-his-daughter-1.23794723" target="_blank">
+								 Learn more about Jim and Mariel. </a>
 						</div>
 					</td>
 				</tr>
-			</table>
-
-			<div class="line_divider"> </div>
 
 			<!-- About UVic BMED -->
-			<table 	cellspacing="0" cellpadding="0">
-			<tr>
+				<tr>
 					<td>
 						<div class="tableTextDiv">
 							<h3> UVic Biomedical Engineering Design </h3>
 							<p> UVic BME Design is an interdisciplinary, student-run club based in the University of Victoria.
-								 Our mission is to develop and fuel the next generation of engineering leaders through
-								 combining the worlds of medicine and innovation. Our projects aim to solve the needs of
-								 university researchers and clinicians in the field, and make an impact in the local community.</p>
-							<p> <a id="underlink" style=color:#464a4f href="https://uvicbmedesign.wixsite.com/bme-design" target="_blank"> <b>Visit our club website.</b> </a> </p>
+									Our mission is to develop and fuel the next generation of engineering leaders through
+									combining the worlds of medicine and innovation. Our projects aim to solve the needs of
+									university researchers and clinicians in the field, and make an impact in the local community.</p>
+									<a style="color:#323232; font-weight: bold" href="https://uvicbmedesign.wixsite.com/bme-design" target="_blank"> Visit our club website. </a>
 						</div>
-					</td>
-					<td>
 						<div class="left-aligned-roundedImage">
-							<a id="underlink" href="https://www.uvicbmedesign.com" target="_blank">
+							<a href="https://www.uvicbmedesign.com" target="_blank">
 								<img src="{% static "bmed_logo.png" %}" width=500px height=300px alt="UVic BMED logo">
 							</a>
 
 						</div class="left-aligned-roundedImage">
 					</td>
-			</tr>
-			</table>
+				</tr>
+				</table>
 
-		</div> <!-- end of about -->
+				<footer>
+					&copy; CareChanger
+				</footer>
+		</div> <!-- end of content section  --->
 
-			<footer>
-				<p style=font-size:20px;padding:10px;color:#ffffff> For more information, you can contact us <a id="here" href="mailto:uvicbmedesign@gmail.com"><b>here</b></a>.
-				</p>
-					&copy; CareChanger</footer>
-		</body>
+
+	</body>
 </html>
